@@ -1,0 +1,42 @@
+bot:
+    group_token:
+        - none 
+    user_token:
+        - none
+    # Администраторы бота. Будут доступны некоторые команды. ИДы писать только цифрами.
+    admins:
+        - 1
+
+regexps:
+    links_pattern: (http://|https://)?(www\.)?(vk\.com|vkontakte\.ru)/(id[\d{9}]|[a-zA-Z0-9_.]+)
+    hyperlinks_pattern: (\[(club|id[\d+]{1,9})\|([^]]*)])
+    invite_links_pattern: ((http://|https://)?(vk\.me)\/join/([a-zA-Z0-9_./=]+))
+
+
+database:
+    host: 127.0.0.1
+    port: 3306
+    user: admin
+    password: admin
+
+    database: none
+    collection: none
+
+    # Если установлен url, игнорируются параметры host, port, user, password
+    url: none
+
+
+logging:
+    # Включить логирование всех уровней?
+    log: true
+    # Выключить логирование отладочной информации?
+    log_disable_debug: true
+    # Включить логирование всех ошибок?
+    log_errors: false
+    # Включить логирование в консоль?
+    log_console: false
+
+    # Путь записи логов всех уровней.
+    log_path: logs/%Y-%m-%d_%H.log
+    # Путь записи логов с ошибками.
+    log_errors_path: logs/%Y-%m-%d_%H-error.log

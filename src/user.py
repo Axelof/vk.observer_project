@@ -36,6 +36,7 @@ class User(ABCFramework):
         state_dispenser: Optional["ABCStateDispenser"] = None,
         error_handler: Optional["ABCErrorHandler"] = None,
         task_each_event: bool = True,
+        db=None,
         bot=None
     ):
         self.api: Union["ABCAPI", API] = API(token) if token is not None else api  # type: ignore
@@ -48,6 +49,7 @@ class User(ABCFramework):
         self._router = router or Router()
         self._loop = loop
         self.task_each_event = task_each_event
+        self.db = db
         self.bot = bot
 
     @property
@@ -90,6 +92,10 @@ class User(ABCFramework):
                 **kwargs,
             )
         )
+
+    def set_database(self, db):
+        self.db = db
+        return self
 
     def add_blueprint(self, blueprint: Union[ABCBlueprint, List[ABCBlueprint]]):
         if isinstance(blueprint, (list, tuple)):

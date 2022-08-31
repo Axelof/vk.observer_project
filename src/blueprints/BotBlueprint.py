@@ -32,12 +32,14 @@ class BotBlueprint(ABCBlueprint):
         api: Union["ABCAPI", "API"],
         polling: "ABCPolling",
         state_dispenser: "ABCStateDispenser",
+        db: Any,
         user: Any,
         bot: Any = None
     ) -> "BotBlueprint":
         self.api = api
         self.polling = polling
         self.state_dispenser = state_dispenser
+        self.db = db
         self.user = user
         self.constructed = True
         return self
@@ -45,7 +47,7 @@ class BotBlueprint(ABCBlueprint):
     def load(self, framework: "Bot") -> "BotBlueprint":
         framework.labeler.load(self.labeler)  # type: ignore
         logger.info("Blueprint {!r} loaded", self.name)
-        return self.construct(framework.api, framework.polling, framework.state_dispenser, framework.user)
+        return self.construct(framework.api, framework.polling, framework.state_dispenser, framework.db, framework.user)
 
     @property
     def on(self) -> BotLabeler:

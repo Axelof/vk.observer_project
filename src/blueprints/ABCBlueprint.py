@@ -18,6 +18,7 @@ class ABCBlueprint(ABCFramework):
     _polling: "ABCPolling"
     _api: "ABCAPI"
     _state_dispenser: "ABCStateDispenser"
+    _db: Any
     _user: Any
     _bot: Any
 
@@ -26,13 +27,22 @@ class ABCBlueprint(ABCFramework):
 
     @abstractmethod
     def construct(
-        self, api: "ABCAPI", polling: "ABCPolling", state_dispenser: "ABCStateDispenser", user: Any, bot: Any
+        self, api: "ABCAPI", polling: "ABCPolling", state_dispenser: "ABCStateDispenser", db: Any, user: Any, bot: Any
     ) -> "ABCBlueprint":
         pass
 
     @abstractmethod
     def load(self, framework: Any) -> "ABCBlueprint":
         pass
+
+    @property
+    def db(self):
+        self.assert_constructed()
+        return self._db
+
+    @db.setter
+    def db(self, db):  # type: ignore
+        self._db = db
 
     @property
     def bot(self):

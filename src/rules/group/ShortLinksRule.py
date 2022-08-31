@@ -7,19 +7,19 @@ from src.config import ConfigModel as ConfigModel
 from src.config import config as config_
 
 
-class InviteLinksRule(ABCRule[Message]):
+class ShortLinksRule(ABCRule[Message]):
     def __init__(self, config: ConfigModel = config_):
         self.config: ConfigModel = config
 
     async def check(self, message: Message) -> dict:
-        invite_links = [*re.compile(self.config.regexps.invite_links_pattern).findall(message.text)]
-        return {"invite_links": invite_links}
+        short_links = [*re.compile(self.config.regexps.shortened_links_patterns).findall(message.text)]
+        return {"short_links": short_links}
 
 
-class HasInviteLinksRule(ABCRule[Message]):
+class HasShortLinksRule(ABCRule[Message]):
     def __init__(self, config: ConfigModel = config_):
         self.config: ConfigModel = config
 
     async def check(self, message: Message) -> bool:
-        links = [*re.compile(self.config.regexps.invite_links_pattern).findall(message.text)]
-        return len(links) != 0
+        short_links = [*re.compile(self.config.regexps.shortened_links_patterns).findall(message.text)]
+        return len(short_links) != 0

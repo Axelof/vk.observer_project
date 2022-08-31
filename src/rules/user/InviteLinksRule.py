@@ -12,8 +12,8 @@ class InviteLinksRule(ABCRule[Message]):
         self.config: ConfigModel = config
 
     async def check(self, message: Message) -> dict:
-        links = [*re.compile(self.config.regexps.invite_links_pattern).findall(message.text)]
-        return {"invite_links": links}
+        invite_links = [*re.compile(self.config.regexps.invite_links_pattern).findall(message.text)]
+        return {"invite_links": invite_links}
 
 
 class HasInviteLinksRule(ABCRule[Message]):
@@ -21,5 +21,5 @@ class HasInviteLinksRule(ABCRule[Message]):
         self.config: ConfigModel = config
 
     async def check(self, message: Message) -> bool:
-        links = [*re.compile(self.config.regexps.invite_links_pattern).findall(message.text)]
-        return len(links) != 0
+        invite_links = [*re.compile(self.config.regexps.invite_links_pattern).findall(message.text)]
+        return len(invite_links) != 0

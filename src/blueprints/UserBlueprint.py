@@ -32,12 +32,14 @@ class UserBlueprint(ABCBlueprint):
         api: Union["ABCAPI", "API"],
         polling: "ABCPolling",
         state_dispenser: "ABCStateDispenser",
+        db: Any,
         bot: Any,
         user: Any = None
     ) -> "UserBlueprint":
         self.api = api
         self.polling = polling
         self.state_dispenser = state_dispenser
+        self.db = db
         self.bot = bot
         self.constructed = True
         return self
@@ -45,7 +47,7 @@ class UserBlueprint(ABCBlueprint):
     def load(self, framework: "User") -> "UserBlueprint":
         framework.labeler.load(self.labeler)  # type: ignore
         logger.info("Blueprint {!r} loaded", self.name)
-        return self.construct(framework.api, framework.polling, framework.state_dispenser, framework.bot)
+        return self.construct(framework.api, framework.polling, framework.state_dispenser, framework.db, framework.bot)
 
     @property
     def on(self) -> UserLabeler:

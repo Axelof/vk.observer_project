@@ -21,6 +21,7 @@ class _Regexps(BaseModel):
     links_pattern: str
     hyperlinks_pattern: str
     invite_links_pattern: str
+    shortened_links_patterns: str
 
 
 class _Database(BaseModel):

@@ -1,10 +1,11 @@
-from .blueprints import user_bps, group_bps
-from .middlewares import user_mws, group_mws
-from .user import User
-from .bot import Bot
-from .config import config
+from src.blueprints import user_bps, group_bps
+from src.middlewares import user_mws, group_mws
+from src.user import User
+from src.bot import Bot
+from src.config import config
+from src.utils import loop, loop_wrapper
+# from src.database.db import database
 
-from utils import loop, loop_wrapper
 
 user: User = (
     User(
@@ -13,6 +14,7 @@ user: User = (
         loop_wrapper=loop_wrapper,
     )
     .add_middleware(middleware=user_mws)
+    #  .set_database(database)
 )
 
 bot: Bot = (
@@ -22,6 +24,7 @@ bot: Bot = (
         loop_wrapper=loop_wrapper,
     )
     .add_middleware(middleware=group_mws)
+    #  .set_database(database)
 )
 
 user.bot, bot.user = bot, user

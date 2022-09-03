@@ -2,7 +2,10 @@ import asyncio
 from abc import abstractmethod
 from typing import TYPE_CHECKING, Any, NoReturn, Optional, Union
 
+from pymongo.database import Database
 from vkbottle.framework.abc import ABCFramework
+from vkbottle.bot import Bot
+from vkbottle.user import User
 
 if TYPE_CHECKING:
     from vkbottle.api import ABCAPI, API
@@ -27,7 +30,13 @@ class ABCBlueprint(ABCFramework):
 
     @abstractmethod
     def construct(
-        self, api: "ABCAPI", polling: "ABCPolling", state_dispenser: "ABCStateDispenser", db: Any, user: Any, bot: Any
+        self,
+        api: "ABCAPI",
+        polling: "ABCPolling",
+        state_dispenser: "ABCStateDispenser",
+        db: Database,
+        user: User,
+        bot: Bot,
     ) -> "ABCBlueprint":
         pass
 

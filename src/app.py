@@ -4,6 +4,7 @@ from src.user import User
 from src.bot import Bot
 from src.config import config
 from src.utils import loop, loop_wrapper
+
 # from src.database.db import database
 
 
@@ -12,8 +13,7 @@ user: User = (
         token=config.bot.user_token,
         loop=loop,
         loop_wrapper=loop_wrapper,
-    )
-    .add_middleware(middleware=user_mws)
+    ).add_middleware(middleware=user_mws)
     #  .set_database(database)
 )
 
@@ -22,8 +22,7 @@ bot: Bot = (
         token=config.bot.group_token,
         loop=loop,
         loop_wrapper=loop_wrapper,
-    )
-    .add_middleware(middleware=group_mws)
+    ).add_middleware(middleware=group_mws)
     #  .set_database(database)
 )
 
@@ -31,8 +30,4 @@ user.bot, bot.user = bot, user
 user.add_blueprint(blueprint=user_bps)
 bot.add_blueprint(blueprint=group_bps)
 
-__all__ = (
-    "user",
-    "bot",
-    "loop_wrapper"
-)
+__all__ = ("user", "bot", "loop_wrapper")

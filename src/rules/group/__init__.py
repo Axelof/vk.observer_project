@@ -5,15 +5,22 @@ from src.rules.group.FromMeRule import FromMeRule
 from src.rules.group.IsAdminRule import IsAdminRule
 
 group_rules = (
-    MentionsRule, HasMentionsRule,
-    InviteLinksRule, HasInviteLinksRule,
-    ShortLinksRule, HasShortLinksRule,
-    FromMeRule, IsAdminRule
+    MentionsRule,
+    HasMentionsRule,
+    InviteLinksRule,
+    HasInviteLinksRule,
+    ShortLinksRule,
+    HasShortLinksRule,
+    FromMeRule,
+    IsAdminRule,
 )
 
 __all__ = (
     "group_rules",
-    "MentionsRule", "HasMentionsRule",
-    "InviteLinksRule", "HasInviteLinksRule",
-    "FromMeRule", "IsAdminRule"
+    "MentionsRule",
+    "HasMentionsRule",
+    "InviteLinksRule",
+    "HasInviteLinksRule",
+    "FromMeRule",
+    "IsAdminRule",
 )

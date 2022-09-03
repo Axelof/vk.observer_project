@@ -18,7 +18,7 @@ class DataBase:
             if sort is not None:
                 cursor = cursor.sort(sort)
 
-            return [document for document in await cursor.to_list(int(1E10))]
+            return [document for document in await cursor.to_list(int(1e10))]
 
         else:
             return await self.collection.find_one(data)
@@ -31,6 +31,10 @@ class DataBase:
 
     async def update(self, old_data: dict, new_data: dict, multiple: bool = False):
         if multiple is True:
-            return await self.collection.update_many(old_data, {"$set": new_data}).modified_count
+            return await self.collection.update_many(
+                old_data, {"$set": new_data}
+            ).modified_count
         else:
-            return await self.collection.update_one(old_data, {"$set": new_data}).modified_count
+            return await self.collection.update_one(
+                old_data, {"$set": new_data}
+            ).modified_count

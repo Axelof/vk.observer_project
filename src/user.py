@@ -37,7 +37,7 @@ class User(ABCFramework):
         error_handler: Optional["ABCErrorHandler"] = None,
         task_each_event: bool = True,
         db=None,
-        bot=None
+        bot=None,
     ):
         self.api: Union["ABCAPI", API] = API(token) if token is not None else api  # type: ignore
         self.id: Optional[int] = None
@@ -82,7 +82,9 @@ class User(ABCFramework):
         **kwargs,
     ):
         loop = get_event_loop()
-        assert not loop.is_running(), "Event loop is already running, use direct_auth instead"
+        assert (
+            not loop.is_running()
+        ), "Event loop is already running, use direct_auth instead"
         return loop.run_until_complete(
             cls.direct_auth(
                 login=login,

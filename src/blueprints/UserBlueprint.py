@@ -1,11 +1,13 @@
 from typing import TYPE_CHECKING, Optional, Union, Any
 
+from pymongo.database import Database
 from vkbottle.dispatch import Router
 from vkbottle.framework.labeler import UserLabeler
 from vkbottle.modules import logger
 
 from .ABCBlueprint import ABCBlueprint
 from src.user import User
+from src.bot import Bot
 
 if TYPE_CHECKING:
     from vkbottle.api import ABCAPI, API
@@ -32,9 +34,9 @@ class UserBlueprint(ABCBlueprint):
         api: Union["ABCAPI", "API"],
         polling: "ABCPolling",
         state_dispenser: "ABCStateDispenser",
-        db: Any,
-        bot: Any,
-        user: Any = None
+        db: Database,
+        bot: Bot,
+        user: User = None
     ) -> "UserBlueprint":
         self.api = api
         self.polling = polling
@@ -47,7 +49,13 @@ class UserBlueprint(ABCBlueprint):
     def load(self, framework: "User") -> "UserBlueprint":
         framework.labeler.load(self.labeler)  # type: ignore
         logger.info("Blueprint {!r} loaded", self.name)
-        return self.construct(framework.api, framework.polling, framework.state_dispenser, framework.db, framework.bot)
+        return self.construct(
+            framework.api,
+            framework.polling,
+            framework.state_dispenser,
+            framework.db,
+            framework.bot,
+        )
 
     @property
     def on(self) -> UserLabeler:

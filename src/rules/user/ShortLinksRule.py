@@ -12,7 +12,11 @@ class ShortLinksRule(ABCRule[Message]):
         self.config: ConfigModel = config
 
     async def check(self, message: Message) -> dict:
-        short_links = [*re.compile(self.config.regexps.shortened_links_patterns).findall(message.text)]
+        short_links = [
+            *re.compile(self.config.regexps.shortened_links_patterns).findall(
+                message.text
+            )
+        ]
         return {"short_links": short_links}
 
 
@@ -21,5 +25,9 @@ class HasShortLinksRule(ABCRule[Message]):
         self.config: ConfigModel = config
 
     async def check(self, message: Message) -> bool:
-        short_links = [*re.compile(self.config.regexps.shortened_links_patterns).findall(message.text)]
+        short_links = [
+            *re.compile(self.config.regexps.shortened_links_patterns).findall(
+                message.text
+            )
+        ]
         return len(short_links) != 0

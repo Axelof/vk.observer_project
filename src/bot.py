@@ -1,5 +1,5 @@
 import asyncio
-from typing import TYPE_CHECKING, NoReturn, Optional, Tuple, Union, List, Any
+from typing import TYPE_CHECKING, NoReturn, Optional, Union, List, Any
 
 from vkbottle.api import API
 from vkbottle.callback import BotCallback
@@ -38,7 +38,7 @@ class Bot(ABCFramework):
         error_handler: Optional["ABCErrorHandler"] = None,
         task_each_event: bool = True,
         db=None,
-        user=None
+        user=None,
     ):
         self.api: API = API(token) if token is not None else api  # type: ignore
         self.error_handler = error_handler or ErrorHandler()

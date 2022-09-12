@@ -97,8 +97,8 @@ class Bot(ABCFramework):
 
     async def run_polling(self, custom_polling: Optional["ABCPolling"] = None):
         polling = custom_polling or self.polling
-        config.bot.info.group_id = (await polling.api.groups.get_by_id())[0].id
-        logger.info("Starting polling for @club{!r}", config.bot.info.group_id)
+        config.general.group.id = (await polling.api.groups.get_by_id())[0].id
+        logger.info("Starting polling for @club{!r}", config.general.group.id)
 
         async for event in polling.listen():
             logger.debug("New event was received: {}", event)
@@ -106,7 +106,7 @@ class Bot(ABCFramework):
                 if not self.task_each_event:
                     await self.router.route(update, polling.api)
                 else:
-                    self.loop.create_task(self.router.route(update, polling.api))
+                    self.loop.create_task(self.router.route(update, polling.api), name="BotPolling")
 
     def run_forever(self) -> NoReturn:  # type: ignore
         logger.info("Loop will be ran forever")

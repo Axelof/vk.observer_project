@@ -131,8 +131,8 @@ class User(ABCFramework):
 
     async def run_polling(self, custom_polling: Optional["ABCPolling"] = None) -> NoReturn:  # type: ignore
         polling = custom_polling or self.polling
-        config.bot.info.user_id = (await polling.api.users.get())[0].id
-        logger.info("Starting polling for @id{!r}", config.bot.info.user_id)
+        config.general.user.id = (await polling.api.users.get())[0].id
+        logger.info("Starting polling for @id{!r}", config.general.user.id)
 
         async for event in polling.listen():  # type: ignore
             logger.debug("New event was received: {}", event)
@@ -140,7 +140,7 @@ class User(ABCFramework):
                 if not self.task_each_event:
                     await self.router.route(update, polling.api)
                 else:
-                    self.loop.create_task(self.router.route(update, polling.api))
+                    self.loop.create_task(self.router.route(update, polling.api), name="UserPolling")
 
     def run_forever(self) -> NoReturn:
         logger.info("Loop will be ran forever")

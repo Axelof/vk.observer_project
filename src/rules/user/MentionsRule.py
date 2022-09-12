@@ -20,12 +20,18 @@ class MentionsRule(ABCRule[Message]):
 
 
 class HasMentionsRule(ABCRule[Message]):
-    def __init__(self, config: ConfigModel = config_):
+    def __init__(self, config: ConfigModel = config_, ignore_switch: bool = False):
         self.config: ConfigModel = config
+        self.ignore_switch = ignore_switch
 
     async def check(self, message: Message) -> bool:
         mentions = [
             *[_[2] for _ in re.compile(self.config.regexps.links_pattern).findall(message.text)],
             *[_[1] for _ in re.compile(self.config.regexps.hyperlinks_pattern).findall(message.text)]
         ]
+
+        if not self.ignore_switch:
+            if not self.config.triggers.mentions:
+                return False
+
         return len(mentions) != 0

@@ -22,8 +22,6 @@ def get_config(string: Union[str, bytes]) -> ConfigModel:
     logger.remove()
     yaml_config: str = remove_comments_from_string(string)  # type: ignore
     dict_config: dict = yaml.load(yaml_config, YamlLoader)
-    dict_config["eal"] = dict(key="value")
-
     config: ConfigModel = ConfigModel(**dict_config)
 
     log_format = (
@@ -43,7 +41,7 @@ def get_config(string: Union[str, bytes]) -> ConfigModel:
     if config.logging.log:
         enable_file_logging(
             time.strftime(config.logging.log_path),
-            level=10 if config.logging.log_disable_debug else 20,
+            level=10 if config.logging.log_debug else 20,
             format=log_format,
             rotation="5 MB",
             compression="zip",

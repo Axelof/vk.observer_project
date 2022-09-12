@@ -5,16 +5,20 @@ from typing import List, Optional, Union
 from pydantic import BaseModel
 
 
-class _Info(BaseModel):
-    group_id: int = 0
-    user_id: int = 0
+class _User(BaseModel):
+    token: Union[List[str], str]
+    id: Optional[int]
 
 
 class _Bot(BaseModel):
-    group_token: Union[List[str], str]
-    user_token: Union[List[str], str]
+    token: Union[List[str], str]
+    id: Optional[int]
+
+
+class _General(BaseModel):
+    user: _User
+    group: _Bot
     admins: List[int] = []
-    info: _Info = _Info()
 
 
 class _Regexps(BaseModel):
@@ -36,15 +40,27 @@ class _Database(BaseModel):
 
 class _Logging(BaseModel):
     log: bool = False
-    log_disable_debug: bool = False
+    log_debug: bool = False
     log_errors: bool = False
     log_console: bool = True
-    log_path: str = "logs/%Y-%M-%d_%H-%M-%S.log"
-    log_errors_path: str = "logs/%Y-%M-%d_%H-%M-%S-error.log"
+    log_path: str = "logs/%Y-%m-%d_%H.log"
+    log_errors_path: str = "logs/%Y-%m-%d_%H-error.log"
+
+
+class _Triggers(BaseModel):
+    invite_links: bool = True
+    mentions: bool = True
+    short_links: bool = True
+
+
+class _Middlewares(BaseModel):
+    no_group_messages: bool = False
 
 
 class ConfigModel(BaseModel):
-    bot: _Bot
+    general: _General
     database: _Database
     logging: _Logging
     regexps: _Regexps
+    triggers: _Triggers
+    middlewares: _Middlewares

@@ -1,8 +1,10 @@
-bot:
-    group_token:
-        - none
-    user_token:
-        - none
+general:
+    group:
+        token:
+            - none
+    user:
+        token:
+            - none
 
     # Администраторы бота. Будут доступны некоторые команды. ИДы писать только цифрами.
     admins:
@@ -10,8 +12,8 @@ bot:
 
 regexps:
     # Регулярные выражения для поиска упоминаний, ссылок, и т.д.
-    links_pattern: (http://|https://)?(www\.)?[vk\.com|vkontakte\.ru]/(id[\d{9}]|[a-zA-Z0-9_.]+)
-    hyperlinks_pattern: (\[(club|id[\d+]{1,9})\|([^]]*)])
+    links_pattern: (https?:\/\/)?(www\.)?vk\.com\/(([a-zA-Z0-9._])*)\/?
+    hyperlinks_pattern: (\[((club|id)[\d+]{1,9})\|([^]]*)])
     invite_links_pattern: ((http://|https://)?(vk\.me)\/join/([a-zA-Z0-9_./=]+))
     shortened_links_patterns: ((http://|https://)?(vk\.cc)\/([a-zA-Z0-9_./=]+))
 
@@ -27,6 +29,16 @@ database:
 
     # Если установлен url, игнорируются параметры host, port, user, password
     url: none
+
+
+triggers:
+    invite_links: true
+    mentions: true
+    short_links: true
+
+
+middlewares:
+    ignore_group_messages: false
 
 
 logging:

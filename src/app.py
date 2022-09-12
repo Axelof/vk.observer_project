@@ -10,7 +10,7 @@ from src.utils import loop, loop_wrapper
 
 user: User = (
     User(
-        token=config.bot.user_token,
+        token=config.general.user.token,
         loop=loop,
         loop_wrapper=loop_wrapper,
     ).add_middleware(middleware=user_mws)
@@ -19,7 +19,7 @@ user: User = (
 
 bot: Bot = (
     Bot(
-        token=config.bot.group_token,
+        token=config.general.group.token,
         loop=loop,
         loop_wrapper=loop_wrapper,
     ).add_middleware(middleware=group_mws)

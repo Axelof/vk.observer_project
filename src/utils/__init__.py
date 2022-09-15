@@ -1,15 +1,15 @@
 from sys import platform
 from vkbottle.tools.dev.loop_wrapper import LoopWrapper
+import asyncio
+from loguru import logger
 
 if platform == "linux" or platform == "linux2":
-    from uvloop import EventLoopPolicy
-    loop = EventLoopPolicy()
-
-else:
-    from asyncio import get_event_loop
-    loop = get_event_loop()
+    import uvloop
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    logger.info("uvloop \"EventLoopPolicy\" configured")
 
 
+loop = asyncio.get_event_loop()
 loop_wrapper = LoopWrapper()
 
 

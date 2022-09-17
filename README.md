@@ -14,11 +14,12 @@
 <div align="center">
   <img src="https://img.shields.io/github/languages/code-size/Axelof/vk.observer_project?color=4a0080&style=for-the-badge"/>
   <img src="https://img.shields.io/github/repo-size/Axelof/vk.observer_project?color=4a0080&style=for-the-badge"/>
+  <img src="https://img.shields.io/tokei/lines/github/Axelof/vk.observer_project?color=4a0080&style=for-the-badge"/>
   <img src="https://img.shields.io/pypi/pyversions/vkbottle?color=00ad4b&style=for-the-badge"/>
   <a href="https://github.com/vkbottle/vkbottle"><img src="https://img.shields.io/badge/Framework-VKBottle-important?style=for-the-badge"/></a>
 </div>
 
-> Бот предназначен для наблюдения за ссылками, упоминаниями, а также опционально показывает удалённое сообщение, и, уведомляет об изменении сообщения, показывая исходный текст.
+> Бот предназначен для наблюдения за сокращёнными ссылками, инвайтами, упоминаниями. ( more in future )
 
 ---
 

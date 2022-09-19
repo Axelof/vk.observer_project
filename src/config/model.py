@@ -47,10 +47,16 @@ class _Logging(BaseModel):
     log_errors_path: str = "logs/%Y-%m-%d_%H-error.log"
 
 
+class _MentionsTrigger(BaseModel):
+    user: bool = False
+    group: bool = False
+
+
 class _Triggers(BaseModel):
+    mentions: _MentionsTrigger
     invite_links: bool = True
-    mentions: bool = True
     short_links: bool = True
+    invites: bool = True
 
 
 class _Middlewares(BaseModel):

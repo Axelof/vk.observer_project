@@ -10,4 +10,4 @@ class IsAdminRule(ABCRule[Message]):
         self.config: ConfigModel = config
 
     async def check(self, event: Message) -> bool:
-        return event.from_id in self.config.bot.admins
+        return event.from_id in self.config.general.admins

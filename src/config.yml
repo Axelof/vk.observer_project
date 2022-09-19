@@ -10,6 +10,7 @@ general:
     admins:
         - 1
 
+
 regexps:
     # Регулярные выражения для поиска упоминаний, ссылок, и т.д.
     links_pattern: (https?:\/\/)?(www\.)?vk\.com\/(([a-zA-Z0-9._])*)\/?
@@ -32,9 +33,12 @@ database:
 
 
 triggers:
+    mentions:
+        user: true
+        group: false
     invite_links: true
-    mentions: true
     short_links: true
+    invites: true
 
 
 middlewares:

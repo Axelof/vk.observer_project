@@ -20,10 +20,16 @@ async def mentions_trigger(message: Message, mentions: list):
     mentions = (
         await bp.bot.api.execute(
             code=validate_mentions(
-                mentions=mentions
+                mentions=[mentions[_] for _ in range(20)]
             )
         )
     )["response"]
+
+    if not config.triggers.mentions.group:
+        mentions = [mention for mention in mentions if mention.startswith("id")]
+
+    if not config.triggers.mentions.user:
+        mentions = [mention for mention in mentions if mention.startswith("club")]
 
     if len(mentions) == 0:
         return

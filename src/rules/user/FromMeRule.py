@@ -10,4 +10,4 @@ class FromMeRule(ABCRule[Message]):
         self.config: ConfigModel = config
 
     async def check(self, message: Message) -> bool:
-        return message.from_id == self.config.bot.info.user_id
+        return message.from_id == self.config.general.user.id

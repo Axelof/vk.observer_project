@@ -16,6 +16,7 @@ class MentionsRule(ABCRule[Message]):
             *[_[2] for _ in re.compile(self.config.regexps.links_pattern).findall(message.text)],
             *[_[1] for _ in re.compile(self.config.regexps.hyperlinks_pattern).findall(message.text)]
         ]
+
         return {"mentions": mentions}
 
 
@@ -31,7 +32,7 @@ class HasMentionsRule(ABCRule[Message]):
         ]
 
         if not self.ignore_switch:
-            if not self.config.triggers.mentions:
+            if not self.config.triggers.mentions.user and not self.config.triggers.mentions.group:
                 return False
 
         return len(mentions) != 0

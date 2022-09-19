@@ -1,5 +1,3 @@
-from src.middlewares.group.NoGroupMiddleware import NoGroupMiddleware
-
-group_mws = (NoGroupMiddleware,)
+group_mws = ()
 
 __all__ = ("group_mws",)

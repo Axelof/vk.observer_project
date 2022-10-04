@@ -68,7 +68,7 @@ async def mentions_trigger(message: Message, short_links: list):
                 f"Обнаружены сокращённые ссылки! \n\n {valid_links} {invalid_links}",
     )
 
-    await bp.api.messages.delete(message_ids=user_execute_response["message_id"], delete_for_all=True)
+    await bp.api.messages.delete(message_ids=user_execute_response["message_id"])
 
 
 @vkscript

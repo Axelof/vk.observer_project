@@ -57,4 +57,3 @@ async def control_menu_event(event: MessageEvent):
 )
 async def control_menu_event(event: MessageEvent):
     await bp.api.messages.delete(peer_id=event.peer_id, cmids=event.conversation_message_id, delete_for_all=True)
-

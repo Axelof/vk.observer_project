@@ -2,21 +2,16 @@ from vkbottle.user import Message, rules
 from vkbottle import vkscript
 
 from src.blueprints.UserBlueprint import UserBlueprint
-from src.rules.user.InviteLinksRule import InviteLinksRule, HasInviteLinksRule
+from src.rules.user.AttachmentsRule import AttachmentsRule, HasAttachmentsRule
 from src.config import config
 
 
-bp = UserBlueprint("user.invite_links")
-bp.labeler.auto_rules = [rules.PeerRule(from_chat=True), InviteLinksRule()]
+bp = UserBlueprint("user.attachments")
+bp.labeler.auto_rules = [rules.PeerRule(from_chat=True), AttachmentsRule()]
 
 
-@bp.on.chat_message(HasInviteLinksRule(ignore_switch=True), blocking=False)  # эта функция будет выполняться вне зависимости от положения переключателя в конфиге.
-async def invite_links_trigger(message: Message, invite_links: list):  # можно использовать, к примеру для сбора аналитики.
-    pass
-
-
-@bp.on.chat_message(HasInviteLinksRule(), blocking=False)
-async def invite_links_trigger(message: Message, invite_links: list):
+@bp.on.message(HasAttachmentsRule(), blocking=False)
+async def attachments_trigger(message: Message, attachments: list):
     user_execute_response = (
         await bp.api.execute(
             code=get_conversation_name_and_send_message(
@@ -40,11 +35,12 @@ async def invite_links_trigger(message: Message, invite_links: list):
         random_id=0,
         dont_parse_links=True,
         reply_to=reply_to,
+        attachment=attachments,
         message=f"из \"{user_execute_response['title']}\" [{message.peer_id}]\n\n" +
-        "Обнаружены инвайт ссылки!\n"
+        "Обнаружены вложения!\n"
         + "\n".join(
             f"{_id+1}. {link}"
-            for _id, link in enumerate(invite_links)
+            for _id, link in enumerate(attachments)
         ),
     )
 

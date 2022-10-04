@@ -52,8 +52,20 @@ class _MentionsTrigger(BaseModel):
     group: bool = False
 
 
+class _AttachmentsTrigger(BaseModel):
+    photo: bool = False
+    audio: bool = False
+    video: bool = False
+    doc: bool = False
+    market: bool = False
+    article: bool = False
+    story: bool = False
+    graffiti: bool = False
+
+
 class _Triggers(BaseModel):
     mentions: _MentionsTrigger
+    attachments: _AttachmentsTrigger
     invite_links: bool = True
     short_links: bool = True
     invites: bool = True

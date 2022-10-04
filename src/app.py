@@ -14,7 +14,7 @@ user: User = (
         loop=loop,
         loop_wrapper=loop_wrapper,
     ).add_middleware(middleware=user_mws)
-    #  .set_database(database)
+    # .set_database(database)
 )
 
 bot: Bot = (
@@ -23,7 +23,7 @@ bot: Bot = (
         loop=loop,
         loop_wrapper=loop_wrapper,
     ).add_middleware(middleware=group_mws)
-    #  .set_database(database)
+    # .set_database(database)
 )
 
 user.bot, bot.user = bot, user

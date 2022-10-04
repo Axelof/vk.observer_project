@@ -10,7 +10,6 @@ general:
     admins:
         - 1
 
-
 regexps:
     # Регулярные выражения для поиска упоминаний, ссылок, и т.д.
     links_pattern: (https?:\/\/)?(www\.)?vk\.com\/(([a-zA-Z0-9._])*)\/?
@@ -34,20 +33,29 @@ database:
 
 triggers:
     mentions:
-        user: true
+        user: false
         group: false
-    invite_links: true
-    short_links: true
-    invites: true
+    attachments:
+        photo: false
+        audio: false
+        video: false
+        doc: false
+        market: false
+        article: false
+        story: false
+        graffiti: false
+    invite_links: false
+    short_links: false
+    invites: false
 
 
 middlewares:
-    ignore_group_messages: false
+    ignore_group_messages: true
 
 
 logging:
     # Включить логирование всех уровней?
-    log: true
+    log: false
     # Включить логирование отладочной информации?
     log_debug: false
     # Включить логирование всех ошибок?

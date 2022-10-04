@@ -1,4 +1,7 @@
+import asyncio
 import urllib.parse
+from vkbottle.modules import logger
+
 from src.config import config
 from src.database.engine import DataBase
 
@@ -10,8 +13,11 @@ if not config.database.url:
         f"{config.database.database}"
     )
 
-database = DataBase(
-    config.database.url, config.database.database, config.database.collection
-)
+try:
+    database = DataBase(
+        config.database.url, config.database.database, config.database.collection
+    )
+finally:
+    logger.info("Database connected")
 
 __all__ = (database,)

@@ -20,7 +20,7 @@ async def mentions_trigger(message: Message, mentions: list):
     mentions = (
         await bp.bot.api.execute(
             code=validate_mentions(
-                mentions=[mentions[_] for _ in range(20)]
+                mentions=mentions if len(mentions) <= 20 else [mentions[_] for _ in range(20)]
             )
         )
     )["response"]
@@ -63,7 +63,7 @@ async def mentions_trigger(message: Message, mentions: list):
         + "\n".join([f"{_id+1}. @{mention}" for _id, mention in enumerate(mentions)]),
     )
 
-    await bp.api.messages.delete(message_ids=user_execute_response["message_id"], delete_for_all=True)
+    await bp.api.messages.delete(message_ids=user_execute_response["message_id"])
 
 
 @vkscript

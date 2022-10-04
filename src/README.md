@@ -1,5 +1,5 @@
 <div align="center">  
-  <h3>version - 1.07</h3>  
+  <h3>version - 1.08</h3>
 </div>
 <br/>
 
@@ -8,8 +8,9 @@
 # TODO
 - [x] слежка за упоминаниями, инвайтами, сокращёнными ссылками
 - [x] слежка за добавлением / удалением пользователей 
-- [ ] слежка за удалёнными && отредактированными сообщениями с сохранением истории
-- [ ] слежка за определёнными типами аттачментов (photo, video, poll, etc)
+- [ ] слежка за удалёнными && отредактированными сообщениями с сохранением истории <br/>
+  update 1.8 — невозможно в силу тех. ограничений
+- [x] слежка за определёнными типами аттачментов (photo, video, poll, etc)
 
 # Config
 
@@ -26,7 +27,7 @@ general:
 
 <br/>
 
-### Данная секция в [этой версии](https://github.com/Axelof/vk.observer_project/tree/master/src#version---107) не используется. 
+### Данная секция в [этой версии](https://github.com/Axelof/vk.observer_project/tree/master/src#version---108) не используется. 
 #### Список ID`ов администраторов, перечислять через запятую.
 ```yaml
     admins:
@@ -46,7 +47,7 @@ regexps:
 
 <br/>
 
-### Данная секция в [этой версии](https://github.com/Axelof/vk.observer_project/tree/master/src#version---107) не используется. 
+### Данная секция в [этой версии](https://github.com/Axelof/vk.observer_project/tree/master/src#version---108) не используется. 
 #### Если установлен url, игнорируются параметры host, port, user, password.
 ```yaml
 database:

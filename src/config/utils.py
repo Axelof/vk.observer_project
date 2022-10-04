@@ -24,7 +24,7 @@ def get_config(string: Union[str, bytes]) -> ConfigModel:
     dict_config: dict = yaml.load(yaml_config, YamlLoader)
     config: ConfigModel = ConfigModel(**dict_config)
 
-    log_format = (
+    LOG_FORMAT = (
         "<magenta>AF</magenta> | "
         "<level>{level: <8}</level> | "
         "<italic><green>{time:YYYY-MM-DD HH:mm:ss}</green></italic> | "
@@ -33,16 +33,16 @@ def get_config(string: Union[str, bytes]) -> ConfigModel:
 
     if not config.logging.log_console:
         logger.add(
-            sys.stderr, format=log_format, level="INFO", enqueue=True, colorize=True
+            sys.stderr, format=LOG_FORMAT, level="INFO", enqueue=True, colorize=True
         )
     else:
-        logger.add(sys.stderr, format=log_format, enqueue=True, colorize=True)
+        logger.add(sys.stderr, format=LOG_FORMAT, enqueue=True, colorize=True)
 
     if config.logging.log:
         enable_file_logging(
             time.strftime(config.logging.log_path),
             level=10 if config.logging.log_debug else 20,
-            format=log_format,
+            format=LOG_FORMAT,
             rotation="5 MB",
             compression="zip",
             retention="1 days",
@@ -52,7 +52,7 @@ def get_config(string: Union[str, bytes]) -> ConfigModel:
         enable_file_logging(
             time.strftime(config.logging.log_errors_path),
             level=30,
-            format=log_format,
+            format=LOG_FORMAT,
             rotation="5 MB",
             compression="zip",
             retention="15 days",

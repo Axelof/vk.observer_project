@@ -2,7 +2,7 @@ import motor.motor_asyncio
 
 
 class DataBase:
-    def __init__(self, connection_url, db_name, collection_name):
+    def __init__(self, connection_url: str, db_name: str, collection_name: str):
         self.collection = motor.motor_asyncio.AsyncIOMotorClient(connection_url)[db_name][collection_name]
 
     async def add(self, data: dict, multiple: bool = False):
